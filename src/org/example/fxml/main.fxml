@@ -9,7 +9,7 @@
 <?import org.controlsfx.control.textfield.CustomTextField?>
 <?import java.net.URL?>
 
-<VBox fx:id="parent" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.javabegin.training.fastjava2.javafx.controllers.MainController">
+<VBox fx:id="parent" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.MainController">
     <children>
         <HBox maxHeight="50.0" prefHeight="100.0">
             <children>

@@ -1,4 +1,4 @@
-package ru.javabegin.training.fastjava2.javafx.controllers;
+package org.example.controllers;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ListChangeListener;
@@ -16,13 +16,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.control.textfield.TextFields;
-import ru.javabegin.training.fastjava2.javafx.interfaces.AddressBook;
-import ru.javabegin.training.fastjava2.javafx.interfaces.impls.HibernateAddressBook;
-import ru.javabegin.training.fastjava2.javafx.objects.Lang;
-import ru.javabegin.training.fastjava2.javafx.objects.Person;
-import ru.javabegin.training.fastjava2.javafx.start.Main;
-import ru.javabegin.training.fastjava2.javafx.utils.DialogManager;
-import ru.javabegin.training.fastjava2.javafx.utils.LocaleManager;
+import org.example.interfaces.AddressBook;
+import org.example.interfaces.impls.HibernateAddressBook;
+import org.example.objects.Lang;
+import org.example.objects.Person;
+import org.example.start.Main;
+import org.example.utils.DialogManager;
+import org.example.utils.LocaleManager;
 
 import java.io.IOException;
 import java.lang.reflect.Method;

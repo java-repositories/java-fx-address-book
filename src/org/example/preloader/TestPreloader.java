@@ -1,4 +1,4 @@
-package ru.javabegin.training.fastjava2.javafx.preloader;
+package org.example.preloader;
 
 import javafx.application.Platform;
 import javafx.application.Preloader;

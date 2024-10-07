@@ -7,8 +7,8 @@
         <property name="connection.url">jdbc:sqlite:db\addressbook.db</property>
         <property name="connection.driver_class">org.sqlite.JDBC</property>
         <property name="hibernate.show_sql">true</property>
-        <property name="dialect">ru.javabegin.training.fastjava2.javafx.hibernate.dialect.SQLiteDialect</property>
+        <property name="dialect">org.example.hibernate.dialect.SQLiteDialect</property>
         <property name="hibernate.connection.autocommit">true</property>
-        <mapping resource="ru/javabegin/training/fastjava2/javafx/hibernate/Person.hbm.xml"/>
+        <mapping resource="org/example/hibernate/Person.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,11 +1,11 @@
-package ru.javabegin.training.fastjava2.javafx.interfaces.impls;
+package org.example.interfaces.impls;
 
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import ru.javabegin.training.fastjava2.javafx.db.SQLiteConnection;
-import ru.javabegin.training.fastjava2.javafx.interfaces.AddressBook;
-import ru.javabegin.training.fastjava2.javafx.objects.Person;
+import org.example.db.SQLiteConnection;
+import org.example.interfaces.AddressBook;
+import org.example.objects.Person;
 
 import java.sql.*;
 import java.util.logging.Level;

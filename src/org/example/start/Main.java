@@ -1,4 +1,4 @@
-package ru.javabegin.training.fastjava2.javafx.start;
+package org.example.start;
 
 import com.sun.javafx.application.LauncherImpl;
 import javafx.application.Application;
@@ -8,10 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import ru.javabegin.training.fastjava2.javafx.controllers.MainController;
-import ru.javabegin.training.fastjava2.javafx.objects.Lang;
-import ru.javabegin.training.fastjava2.javafx.preloader.TestPreloader;
-import ru.javabegin.training.fastjava2.javafx.utils.LocaleManager;
+import org.example.preloader.TestPreloader;
+import org.example.utils.LocaleManager;
+import org.example.controllers.MainController;
+import org.example.objects.Lang;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -23,7 +23,7 @@ public class Main extends Application implements Observer {
 
 
     private static final String FXML_MAIN = "../fxml/main.fxml";
-    public static final String BUNDLES_FOLDER = "ru.javabegin.training.fastjava2.javafx.bundles.Locale";
+    public static final String BUNDLES_FOLDER = "org.example.bundles.Locale";
 
     private Stage primaryStage;
 

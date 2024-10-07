@@ -1,6 +1,6 @@
-package ru.javabegin.training.fastjava2.javafx.utils;
+package org.example.utils;
 
-import ru.javabegin.training.fastjava2.javafx.objects.Lang;
+import org.example.objects.Lang;
 
 import java.util.Locale;
 

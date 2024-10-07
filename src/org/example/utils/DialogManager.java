@@ -1,4 +1,4 @@
-package ru.javabegin.training.fastjava2.javafx.utils;
+package org.example.utils;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

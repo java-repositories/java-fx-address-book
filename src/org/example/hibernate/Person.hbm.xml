@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="ru.javabegin.training.fastjava2.javafx.objects.Person" table="Person" schema="">
+    <class name="org.example.objects.Person" table="Person" schema="">
         <id name="id">
             <column name="id" sql-type="integer" not-null="true"/>
             <generator class="increment"/>

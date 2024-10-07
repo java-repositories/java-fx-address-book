@@ -1,4 +1,4 @@
-package ru.javabegin.training.fastjava2.javafx.objects;
+package org.example.objects;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;

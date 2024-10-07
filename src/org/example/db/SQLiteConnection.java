@@ -1,4 +1,4 @@
-package ru.javabegin.training.fastjava2.javafx.db;
+package org.example.db;
 
 import java.io.File;
 import java.sql.Connection;

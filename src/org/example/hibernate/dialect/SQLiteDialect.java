@@ -1,4 +1,4 @@
-package ru.javabegin.training.fastjava2.javafx.hibernate.dialect;
+package org.example.hibernate.dialect;
 
 /*
  * The author disclaims copyright to this source code.  In place of

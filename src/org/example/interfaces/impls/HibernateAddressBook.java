@@ -1,7 +1,8 @@
-package ru.javabegin.training.fastjava2.javafx.interfaces.impls;
+package org.example.interfaces.impls;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.example.interfaces.AddressBook;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -9,8 +10,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.service.ServiceRegistry;
-import ru.javabegin.training.fastjava2.javafx.interfaces.AddressBook;
-import ru.javabegin.training.fastjava2.javafx.objects.Person;
+import org.example.objects.Person;
 
 public class HibernateAddressBook implements AddressBook {
 
