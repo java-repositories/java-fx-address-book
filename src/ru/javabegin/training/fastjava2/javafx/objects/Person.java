@@ -18,14 +18,12 @@ public class Person {
         this.phone = new SimpleStringProperty(phone);
     }
 
-
-
-
     public Person(int id, String fio, String phone) {
         this.fio = new SimpleStringProperty(fio);
         this.phone = new SimpleStringProperty(phone);
         this.id = new SimpleIntegerProperty(id);
     }
+
 
     public String getFio() {
         return fio.get();
@@ -34,6 +32,7 @@ public class Person {
     public void setFio(String fio) {
         this.fio.set(fio);
     }
+
 
     public String getPhone() {
         return phone.get();

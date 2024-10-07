@@ -15,4 +15,9 @@ public interface AddressBook {
 
     ObservableList<Person> find(String text);
 
+    /**
+     * auxiliary method
+     * @return
+     */
+    ObservableList getPersonList();
 }

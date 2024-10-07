@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class EditDialogController implements Initializable{
+public class EditDialogController implements Initializable {
 
     @FXML
     private Button btnOk;
@@ -36,7 +36,7 @@ public class EditDialogController implements Initializable{
 
 
     public void setPerson(Person person) {
-        if (person == null){
+        if (person == null) {
             return;
         }
         saveClicked = false;
@@ -57,7 +57,7 @@ public class EditDialogController implements Initializable{
 
 
     public void actionSave(ActionEvent actionEvent) {
-        if (!checkValues()){
+        if (!checkValues()) {
             return;
         }
         person.setFio(txtFIO.getText());
@@ -67,7 +67,7 @@ public class EditDialogController implements Initializable{
     }
 
     private boolean checkValues() {
-        if (txtFIO.getText().trim().length()==0 || txtPhone.getText().trim().length()==0){
+        if (txtFIO.getText().trim().length() == 0 || txtPhone.getText().trim().length() == 0) {
             DialogManager.showInfoDialog(resourceBundle.getString("error"), resourceBundle.getString("fill_field"));
             return false;
         }

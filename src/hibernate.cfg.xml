@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:sqlite:db\addressbook.db</property>
+        <property name="connection.driver_class">org.sqlite.JDBC</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="dialect">ru.javabegin.training.fastjava2.javafx.hibernate.dialect.SQLiteDialect</property>
+        <property name="hibernate.connection.autocommit">true</property>
+        <mapping resource="ru/javabegin/training/fastjava2/javafx/hibernate/Person.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

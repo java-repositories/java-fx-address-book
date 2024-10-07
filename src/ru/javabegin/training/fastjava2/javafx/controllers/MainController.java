@@ -16,7 +16,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.control.textfield.TextFields;
-import ru.javabegin.training.fastjava2.javafx.interfaces.impls.DBAddressBook;
+import ru.javabegin.training.fastjava2.javafx.interfaces.AddressBook;
+import ru.javabegin.training.fastjava2.javafx.interfaces.impls.HibernateAddressBook;
 import ru.javabegin.training.fastjava2.javafx.objects.Lang;
 import ru.javabegin.training.fastjava2.javafx.objects.Person;
 import ru.javabegin.training.fastjava2.javafx.start.Main;
@@ -33,7 +34,7 @@ import java.util.ResourceBundle;
 public class MainController extends Observable implements Initializable {
 
     private static final String FXML_EDIT = "../fxml/edit.fxml";
-    private DBAddressBook addressBookImpl = new DBAddressBook();
+    private AddressBook addressBookImpl = new HibernateAddressBook();
 
 
     @FXML
@@ -78,9 +79,8 @@ public class MainController extends Observable implements Initializable {
     private ResourceBundle resourceBundle;
 
 
-
-    private static final String RU_CODE="ru";
-    private static final String EN_CODE="en";
+    private static final String RU_CODE = "ru";
+    private static final String EN_CODE = "en";
 
 
     @Override
@@ -107,12 +107,10 @@ public class MainController extends Observable implements Initializable {
 //                    }
 //                }
 //            });
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
 
 
     private void fillData() {
@@ -132,10 +130,10 @@ public class MainController extends Observable implements Initializable {
         comboLocales.getItems().add(langRU);
         comboLocales.getItems().add(langEN);
 
-        if (LocaleManager.getCurrentLang() == null){
+        if (LocaleManager.getCurrentLang() == null) {
             LocaleManager.setCurrentLang(langRU);
             comboLocales.getSelectionModel().select(0);
-        }else{
+        } else {
             comboLocales.getSelectionModel().select(LocaleManager.getCurrentLang().getIndex());
         }
 
@@ -192,7 +190,7 @@ public class MainController extends Observable implements Initializable {
     }
 
     private void updateCountLabel() {
-         labelCount.setText(resourceBundle.getString("count") + ": " + addressBookImpl.getPersonList().size());
+        labelCount.setText(resourceBundle.getString("count") + ": " + addressBookImpl.getPersonList().size());
     }
 
     public void actionButtonPressed(ActionEvent actionEvent) {
@@ -205,7 +203,6 @@ public class MainController extends Observable implements Initializable {
         }
 
         Person selectedPerson = (Person) tableAddressBook.getSelectionModel().getSelectedItem();
-
 
 
         Button clickedButton = (Button) source;
@@ -258,7 +255,7 @@ public class MainController extends Observable implements Initializable {
     }
 
     private boolean confirmDelete() {
-        if (DialogManager.showConfirmDialog(resourceBundle.getString("confirm"), resourceBundle.getString("confirm_delete")).get() == ButtonType.OK){
+        if (DialogManager.showConfirmDialog(resourceBundle.getString("confirm"), resourceBundle.getString("confirm_delete")).get() == ButtonType.OK) {
             return true;
         } else {
             return false;
@@ -267,7 +264,7 @@ public class MainController extends Observable implements Initializable {
     }
 
     private boolean personIsSelected(Person selectedPerson) {
-        if(selectedPerson == null){
+        if (selectedPerson == null) {
             DialogManager.showInfoDialog(resourceBundle.getString("error"), resourceBundle.getString("select_person"));
             return false;
         }
@@ -297,7 +294,7 @@ public class MainController extends Observable implements Initializable {
 
         if (txtSearch.getText().trim().length() == 0) {
             addressBookImpl.findAll();
-        }else {
+        } else {
             addressBookImpl.find(txtSearch.getText());
         }
 
