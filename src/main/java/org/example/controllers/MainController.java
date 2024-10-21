@@ -4,17 +4,14 @@ import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.controlsfx.control.textfield.CustomTextField;
-import org.controlsfx.control.textfield.TextFields;
+import org.example.fxml.EditView;
 import org.example.service.AddressBook;
 import org.example.objects.Lang;
 import org.example.entity.Person;
@@ -30,11 +27,8 @@ import java.util.ResourceBundle;
 @Controller
 public class MainController extends Observable implements Initializable {
 
-    private static final String FXML_EDIT = "../fxml/edit.fxml";
-
     @Autowired
-    private AddressBook addressBookImpl;
-
+    private AddressBook addressBook;
 
     @FXML
     private Button btnAdd;
@@ -66,11 +60,10 @@ public class MainController extends Observable implements Initializable {
     @FXML
     private ComboBox comboLocales;
 
+    @Autowired
+    private EditView editView;
 
-    private Parent fxmlEdit;
-
-    private FXMLLoader fxmlLoader = new FXMLLoader();
-
+    @Autowired
     private EditDialogController editDialogController;
 
     private Stage editDialogStage;
@@ -98,7 +91,7 @@ public class MainController extends Observable implements Initializable {
     }
 
     private void fillTable() {
-        tableAddressBook.setItems(addressBookImpl.findAll());
+        tableAddressBook.setItems(addressBook.findAll());
     }
 
     private void fillLangComboBox() {
@@ -120,7 +113,7 @@ public class MainController extends Observable implements Initializable {
     private void initListeners() {
 
         // слушает изменения в коллекции для обновления надписи "Кол-во записей"
-        addressBookImpl.findAll().addListener(new ListChangeListener<Person>() {
+        addressBook.findAll().addListener(new ListChangeListener<Person>() {
             @Override
             public void onChanged(Change<? extends Person> c) {
                 updateCountLabel();
@@ -155,7 +148,7 @@ public class MainController extends Observable implements Initializable {
     }
 
     private void updateCountLabel() {
-        labelCount.setText(resourceBundle.getString("count") + ": " + addressBookImpl.findAll().size());
+        labelCount.setText(resourceBundle.getString("count") + ": " + addressBook.findAll().size());
     }
 
     public void actionButtonPressed(ActionEvent actionEvent) {
@@ -180,7 +173,7 @@ public class MainController extends Observable implements Initializable {
                 showDialog();
 
                 if (editDialogController.isSaveClicked()) {
-                    addressBookImpl.add(editDialogController.getPerson());
+                    addressBook.add(editDialogController.getPerson());
                     research = true;
                 }
 
@@ -196,7 +189,7 @@ public class MainController extends Observable implements Initializable {
 
                 if (editDialogController.isSaveClicked()) {
                     // коллекция в addressBookImpl и так обновляется, т.к. мы ее редактируем в диалоговом окне и сохраняем при нажатии на ОК
-                    addressBookImpl.update(selectedPerson);
+                    addressBook.update(selectedPerson);
                     research = true;
                 }
 
@@ -208,7 +201,7 @@ public class MainController extends Observable implements Initializable {
                 }
 
                 research = true;
-                addressBookImpl.delete(selectedPerson);
+                addressBook.delete(selectedPerson);
                 break;
         }
 
@@ -243,7 +236,7 @@ public class MainController extends Observable implements Initializable {
             editDialogStage.setMinHeight(150);
             editDialogStage.setMinWidth(300);
             editDialogStage.setResizable(false);
-            editDialogStage.setScene(new Scene(fxmlEdit));
+            editDialogStage.setScene(new Scene(editView.getView(LocaleManager.getCurrentLang().getLocale())));
             editDialogStage.initModality(Modality.WINDOW_MODAL);
             editDialogStage.initOwner(comboLocales.getParent().getScene().getWindow());
         }
@@ -252,9 +245,9 @@ public class MainController extends Observable implements Initializable {
 
     public void actionSearch(ActionEvent actionEvent) {
         if (txtSearch.getText().trim().isEmpty()) {
-            addressBookImpl.findAll();
+            addressBook.findAll();
         } else {
-            addressBookImpl.find(txtSearch.getText());
+            addressBook.find(txtSearch.getText());
         }
     }
 }

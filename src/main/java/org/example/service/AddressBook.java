@@ -20,6 +20,4 @@ public interface AddressBook {
     Page findAll(int from, int count);
 
     Page findAll(int from, int count, String... text);
-
-
 }

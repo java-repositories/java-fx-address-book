@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -52,6 +51,4 @@ public class AddressBookService implements AddressBook {
     public Page findAll(int from, int count, String... text) {
         return personRepository.findByFioContainingIgnoreCase(text[0], PageRequest.of(from, count, Sort.Direction.ASC, "fio"));
     }
-
-
 }
