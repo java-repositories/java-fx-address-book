@@ -42,13 +42,22 @@ public class Main extends Preloader {
             applicationContext.getAutowireCapableBeanFactory().autowireBean(this);
 
             Platform.runLater(() -> {
-                primaryStage.setScene(new Scene(mainView.getView(LocaleManager.RU_LOCALE)));
-                primaryStage.setMinHeight(700);
-                primaryStage.setMinWidth(600);
-                primaryStage.centerOnScreen();
-                primaryStage.setTitle(mainView.getResourceBundle().getString("address_book"));
-                primaryStage.show();
-                preloaderStage.close();
+                try {
+                    primaryStage.setScene(new Scene(mainView.getView(LocaleManager.RU_LOCALE)));
+                    primaryStage.setMinHeight(700);
+                    primaryStage.setMinWidth(600);
+                    primaryStage.centerOnScreen();
+                    primaryStage.setTitle(mainView.getResourceBundle().getString("address_book"));
+                    primaryStage.show();
+                    preloaderStage.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    try {
+                        this.stop();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
             });
         });
         launcherThread.setName("JavaFX-Launcher");

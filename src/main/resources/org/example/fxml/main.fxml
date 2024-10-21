@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import java.lang.*?>
-<?import org.controlsfx.control.textfield.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import org.controlsfx.control.textfield.CustomTextField?>
+<?import org.controlsfx.control.textfield.TextFields?>
 <?import java.net.URL?>
 
 <VBox fx:id="parent" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" styleClass="background" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.MainController">
@@ -32,7 +29,7 @@
         </HBox>
         <AnchorPane maxHeight="30.0" prefHeight="100.0">
             <children>
-                <CustomTextField fx:id="txtSearch" prefHeight="31.0" prefWidth="283.0" styleClass="search-text-field" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="140.0" />
+                <TextFields fx:id="txtSearch" fx:factory="createClearableTextField" prefHeight="31.0" prefWidth="283.0" styleClass="search-text-field" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="140.0" />
                 <Button fx:id="btnSearch" layoutX="266.0" mnemonicParsing="false" onAction="#actionSearch" text="%search" AnchorPane.rightAnchor="0.0" />
             </children>
             <VBox.margin>

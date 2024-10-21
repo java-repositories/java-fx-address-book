@@ -1,6 +1,5 @@
 package org.example.controllers;
 
-import javafx.beans.property.ObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,18 +16,13 @@ import javafx.stage.Stage;
 import org.controlsfx.control.textfield.CustomTextField;
 import org.controlsfx.control.textfield.TextFields;
 import org.example.service.AddressBook;
-import org.example.service.AddressBookService;
 import org.example.objects.Lang;
 import org.example.entity.Person;
-import org.example.Main;
 import org.example.utils.DialogManager;
 import org.example.utils.LocaleManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.Observable;
 import java.util.ResourceBundle;
@@ -52,7 +46,7 @@ public class MainController extends Observable implements Initializable {
     private Button btnDelete;
 
     @FXML
-    private CustomTextField txtSearch;
+    private TextField txtSearch;
 
     @FXML
     private Button btnSearch;
@@ -93,31 +87,9 @@ public class MainController extends Observable implements Initializable {
         this.resourceBundle = resources;
         columnFIO.setCellValueFactory(new PropertyValueFactory<Person, String>("fio"));
         columnPhone.setCellValueFactory(new PropertyValueFactory<Person, String>("phone"));
-        setupClearButtonField(txtSearch);
         fillData();
         initListeners();
     }
-
-    private void setupClearButtonField(CustomTextField customTextField) {
-        try {
-            //todo: setupClearButtonField
-//            Method m = TextFields.class.getDeclaredMethod("setupClearButtonField", TextField.class, ObjectProperty.class);
-//            m.setAccessible(true);
-//            m.invoke(null, customTextField, customTextField.rightProperty());
-//
-//            customTextField.textProperty().addListener(new ChangeListener<String>() {
-//                @Override
-//                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//                    if (txtSearch.getText().trim().length() == 0) {// если полностью очистили текст - вернуть все записи
-//                        addressBookImpl.getPersonList().clear();
-//                    }
-//                }
-//            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 
     private void fillData() {
         fillTable();
@@ -264,9 +236,7 @@ public class MainController extends Observable implements Initializable {
         return true;
     }
 
-
     private void showDialog() {
-
         if (editDialogStage == null) {
             editDialogStage = new Stage();
             editDialogStage.setTitle(resourceBundle.getString("edit"));
@@ -277,19 +247,14 @@ public class MainController extends Observable implements Initializable {
             editDialogStage.initModality(Modality.WINDOW_MODAL);
             editDialogStage.initOwner(comboLocales.getParent().getScene().getWindow());
         }
-
         editDialogStage.showAndWait(); // для ожидания закрытия окна
-
     }
 
-
     public void actionSearch(ActionEvent actionEvent) {
-
-        if (txtSearch.getText().trim().length() == 0) {
+        if (txtSearch.getText().trim().isEmpty()) {
             addressBookImpl.findAll();
         } else {
             addressBookImpl.find(txtSearch.getText());
         }
-
     }
 }
