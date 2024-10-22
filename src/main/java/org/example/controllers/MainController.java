@@ -1,6 +1,8 @@
 package org.example.controllers;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -70,6 +72,7 @@ public class MainController extends Observable implements Initializable {
 
     private ResourceBundle resourceBundle;
 
+    private ObservableList<Person> personList = FXCollections.observableArrayList();
 
     private static final String RU_CODE = "ru";
     private static final String EN_CODE = "en";
@@ -80,18 +83,20 @@ public class MainController extends Observable implements Initializable {
         this.resourceBundle = resources;
         columnFIO.setCellValueFactory(new PropertyValueFactory<Person, String>("fio"));
         columnPhone.setCellValueFactory(new PropertyValueFactory<Person, String>("phone"));
+        tableAddressBook.setItems(personList);
         fillData();
         initListeners();
     }
 
     private void fillData() {
-        fillTable();
+        fillTable(addressBook.findAll());
         fillLangComboBox();
         updateCountLabel();
     }
 
-    private void fillTable() {
-        tableAddressBook.setItems(addressBook.findAll());
+    private void fillTable(ObservableList<Person> list) {
+        personList.clear();
+        personList.addAll(list);
     }
 
     private void fillLangComboBox() {
@@ -152,20 +157,15 @@ public class MainController extends Observable implements Initializable {
     }
 
     public void actionButtonPressed(ActionEvent actionEvent) {
-
         Object source = actionEvent.getSource();
 
         // если нажата не кнопка - выходим из метода
         if (!(source instanceof Button)) {
             return;
         }
-
         Person selectedPerson = (Person) tableAddressBook.getSelectionModel().getSelectedItem();
-
-
         Button clickedButton = (Button) source;
-
-        boolean research = false;
+        boolean dataChanged = false;
 
         switch (clickedButton.getId()) {
             case "btnAdd":
@@ -174,12 +174,9 @@ public class MainController extends Observable implements Initializable {
 
                 if (editDialogController.isSaveClicked()) {
                     addressBook.add(editDialogController.getPerson());
-                    research = true;
+                    dataChanged = true;
                 }
-
-
                 break;
-
             case "btnEdit":
                 if (!personIsSelected(selectedPerson)) {
                     return;
@@ -190,26 +187,21 @@ public class MainController extends Observable implements Initializable {
                 if (editDialogController.isSaveClicked()) {
                     // коллекция в addressBookImpl и так обновляется, т.к. мы ее редактируем в диалоговом окне и сохраняем при нажатии на ОК
                     addressBook.update(selectedPerson);
-                    research = true;
+                    dataChanged = true;
                 }
-
                 break;
-
             case "btnDelete":
                 if (!personIsSelected(selectedPerson) || !(confirmDelete())) {
                     return;
                 }
-
-                research = true;
+                dataChanged = true;
                 addressBook.delete(selectedPerson);
                 break;
         }
 
-
-        if (research) {
+        if (dataChanged) {
             actionSearch(actionEvent);
         }
-
     }
 
     private boolean confirmDelete() {
@@ -218,7 +210,6 @@ public class MainController extends Observable implements Initializable {
         } else {
             return false;
         }
-
     }
 
     private boolean personIsSelected(Person selectedPerson) {
@@ -245,9 +236,9 @@ public class MainController extends Observable implements Initializable {
 
     public void actionSearch(ActionEvent actionEvent) {
         if (txtSearch.getText().trim().isEmpty()) {
-            addressBook.findAll();
+            fillTable(addressBook.findAll());
         } else {
-            addressBook.find(txtSearch.getText());
+            fillTable(addressBook.find(txtSearch.getText()));
         }
     }
 }

@@ -64,7 +64,6 @@ public abstract class SpringFxmlView implements ApplicationContextAware, Observe
     }
 
     public SpringFxmlView() {
-
         this.presenterProperty = new SimpleObjectProperty<>();
         this.resource = getClass().getResource(getFxmlName());
         this.bundle = getResourceBundle(getBundleName());
