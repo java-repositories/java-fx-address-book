@@ -12,7 +12,7 @@ logging:
   file:
     name: logs/app.log
   level:
-    ROOT: warn
+    root: warn
     org:
       springframework: info
 #      hibernate:

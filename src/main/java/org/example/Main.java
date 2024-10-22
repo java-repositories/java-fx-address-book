@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.example.fxml.MainView;
 import org.example.utils.LocaleManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-@Log
+@Slf4j
 public class Main extends Preloader {
 
     private static String[] savedArgs;
@@ -72,7 +72,7 @@ public class Main extends Preloader {
     }
 
     public static void main(String[] args) {
-//        log.info("Starting application...");
+        log.info("Starting application...");
 
         savedArgs = args;
         launch(Main.class, args);

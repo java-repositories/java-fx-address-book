@@ -1,5 +1,7 @@
 package org.example.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -13,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lombok.NonNull;
 import org.example.fxml.EditView;
 import org.example.service.AddressBook;
 import org.example.objects.Lang;
@@ -20,10 +23,12 @@ import org.example.entity.Person;
 import org.example.utils.DialogManager;
 import org.example.utils.LocaleManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 
 import java.net.URL;
 import java.util.Observable;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 @Controller
@@ -74,9 +79,21 @@ public class MainController extends Observable implements Initializable {
 
     private ObservableList<Person> personList = FXCollections.observableArrayList();
 
+    //region pagination
+
+    private static final int PAGE_SIZE = 10;
+
+    public static final int MAX_PAGE_SHOW = 10;
+
+    @FXML
+    private Pagination pagination;
+
+    private Page page;  // текущие постраничные данные
+
+    //endregion
+
     private static final String RU_CODE = "ru";
     private static final String EN_CODE = "en";
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,14 +106,28 @@ public class MainController extends Observable implements Initializable {
     }
 
     private void fillData() {
-        fillTable(addressBook.findAll());
+        fillTable(Optional.empty());
         fillLangComboBox();
     }
 
-    private void fillTable(ObservableList<Person> list) {
-        personList.clear();
-        personList.addAll(list);
-        updateCountLabel();
+    private void fillPagination(Page page) {
+        pagination.setDisable(page.getTotalPages() <= 1);
+        pagination.setPageCount(page.getTotalPages());
+        personList = FXCollections.observableArrayList(page.getContent());
+        tableAddressBook.setItems(personList);
+    }
+
+    // для показа данных с любой страницы
+    private void fillTable(@NonNull Optional<Integer> pageNumber) {
+        int pageNum = pageNumber.orElse(0);
+        if (txtSearch.getText().trim().isEmpty()) {
+            page = addressBook.findAll(pageNum, PAGE_SIZE);
+        } else {
+            page = addressBook.findAll(pageNum, PAGE_SIZE, txtSearch.getText());
+        }
+        fillPagination(page);
+        pagination.setCurrentPageIndex(pageNum);
+        updateCountLabel(page.getTotalElements());
     }
 
     private void fillLangComboBox() {
@@ -116,15 +147,13 @@ public class MainController extends Observable implements Initializable {
     }
 
     private void initListeners() {
-
-        // слушает изменения в коллекции для обновления надписи "Кол-во записей"
-        addressBook.findAll().addListener(new ListChangeListener<Person>() {
+        // смена индекса страницы
+        pagination.currentPageIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
-            public void onChanged(Change<? extends Person> c) {
-                updateCountLabel();
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                fillTable(Optional.of(newValue.intValue()));
             }
         });
-
 
         // слушает двойное нажатие для редактирования записи
         tableAddressBook.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -152,8 +181,8 @@ public class MainController extends Observable implements Initializable {
         });
     }
 
-    private void updateCountLabel() {
-        labelCount.setText(resourceBundle.getString("count") + ": " + addressBook.findAll().size());
+    private void updateCountLabel(long count) {
+        labelCount.setText(resourceBundle.getString("count") + ": " + count);
     }
 
     public void actionButtonPressed(ActionEvent actionEvent) {
@@ -235,10 +264,6 @@ public class MainController extends Observable implements Initializable {
     }
 
     public void actionSearch(ActionEvent actionEvent) {
-        if (txtSearch.getText().trim().isEmpty()) {
-            fillTable(addressBook.findAll());
-        } else {
-            fillTable(addressBook.find(txtSearch.getText()));
-        }
+        fillTable(Optional.empty());
     }
 }

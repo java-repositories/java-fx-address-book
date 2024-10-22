@@ -19,5 +19,6 @@ open module java.fx.address.book.main {
     requires spring.data.jpa;
     requires static lombok;
     requires javafx.swing;
+    requires org.slf4j;
 //    requires controlsfx;
 }
