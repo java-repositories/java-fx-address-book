@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: demo
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite:db/addressbook.db
+  jpa:
+    database-platform: org.example.dialect.SQLiteDialect
+    show-sql: true
+
+logging:
+  file:
+    name: logs/app.log
+  level:
+    ROOT: warn
+    org:
+      springframework: info
