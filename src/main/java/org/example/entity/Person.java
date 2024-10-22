@@ -36,27 +36,23 @@ public class Person {
         return phone.get();
     }
 
-    //todo: photo, address
-//    @Column (name="photo")
-//    @Getter
-//    @Setter
-//    private byte[] photo;
-//
-//    @Column(name = "address")
-//    @Getter
-//    @Setter
-//    private String address;
+    @Column (name="photo")
+    @Getter
+    @Setter
+    private byte[] photo;
 
+    @Column(name = "address")
+    @Getter
+    @Setter
+    private String address;
 
     public void setFio(String fio) {
         this.fio.set(fio);
     }
 
-
     public void setPhone(String phone) {
         this.phone.set(phone);
     }
-
 
     public void setId(int id) {
         this.id.set(id);

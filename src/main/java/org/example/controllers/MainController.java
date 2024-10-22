@@ -91,12 +91,12 @@ public class MainController extends Observable implements Initializable {
     private void fillData() {
         fillTable(addressBook.findAll());
         fillLangComboBox();
-        updateCountLabel();
     }
 
     private void fillTable(ObservableList<Person> list) {
         personList.clear();
         personList.addAll(list);
+        updateCountLabel();
     }
 
     private void fillLangComboBox() {

@@ -15,3 +15,6 @@ logging:
     ROOT: warn
     org:
       springframework: info
+#      hibernate:
+#        nodeValue: info
+#        SQL: debug

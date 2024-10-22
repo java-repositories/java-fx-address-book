@@ -5,7 +5,10 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="500.0" prefHeight="120.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.EditDialogController">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.Image?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="500.0" prefHeight="310.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.EditDialogController">
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -16,7 +19,12 @@
             </Label>
             <Label text="%phone">
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="15.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="45.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="%address">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="30.0" />
                </VBox.margin>
             </Label>
          </children>
@@ -35,9 +43,14 @@
             </TextField>
             <TextField fx:id="txtPhone" prefHeight="30.0">
                <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="30.0" />
                </VBox.margin>
             </TextField>
+            <TextArea id="txtAddress" fx:id="txtAddress" prefHeight="120.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </TextArea>
          </children>
          <BorderPane.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -45,11 +58,11 @@
       </VBox>
    </center>
    <right>
-      <VBox prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="400.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btnOk" defaultButton="true" mnemonicParsing="false" onAction="#actionSave" prefHeight="51.0" prefWidth="145.0" text="ОК">
                <VBox.margin>
-                  <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
+                  <Insets bottom="5.0" left="25.0" right="5.0" />
                </VBox.margin>
             </Button>
             <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#actionClose" prefHeight="31.0" prefWidth="150.0" text="%cancel">
@@ -57,6 +70,25 @@
                   <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
                </VBox.margin>
             </Button>
+            <ImageView id="imagePhoto" fx:id="imagePhoto" fitHeight="125.0" fitWidth="125.0" onMouseClicked="#uploadPhoto" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="15.0" top="10.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@../images/no-icon.jpg" />
+               </image>
+            </ImageView>
+            <Label id="txtLoad" fx:id="txtLoad" contentDisplay="CENTER" onMouseClicked="#loadPhoto" text="%load" textFill="#586ab2" underline="true">
+               <VBox.margin>
+                  <Insets left="30.0" />
+               </VBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
          </children>
          <BorderPane.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
